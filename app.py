@@ -126,7 +126,7 @@ def update(id):
       sql = f"UPDATE posts SET title = '{title}', body = '{body}' WHERE id = '{id}'"
       cursor.execute(sql)
       conn.commit()
-      return redirect(url_for('main'))
+      return redirect(f'/read/{id}')
     
     finally:
       conn.close()
