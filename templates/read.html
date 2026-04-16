@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ post['title'] }}</title>
+</head>
+<body>
+  <h1><a href="/main">메인페이지로 가기</a></h1>
+  <hr>
+  <h3>{{ post['title'] }}</h3>
+  <hr>
+  <div style="width: 500px; height: 500px; border: 1px solid black; border-radius: 10px;">
+    {{ post['body'] }}
+  </div>
+  <a href="/update/{{ post['id'] }}"><button style="width: 200px; height: 50px;">수정</button></a>
+  <a href="/delete/{{ post['id'] }}"><button style="width: 200px; height: 50px;">삭제</button></a>
+</body>
+</html>
