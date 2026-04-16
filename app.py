@@ -30,8 +30,8 @@ def login():
     conn = db_connection()
     try:
       cursor = conn.cursor()
-      sql = "SELECT * FROM users WHERE user_id = ? AND user_ps = ?"
-      cursor.execute(sql, (user_id, user_ps))
+      sql = f"SELECT * FROM users WHERE user_id = '{user_id}' AND user_ps = '{user_id}'"
+      cursor.execute(sql)
       user = cursor.fetchone()
 
       if user:
@@ -53,13 +53,13 @@ def register():
     conn = db_connection()
     try:
       cursor = conn.cursor()
-      sql = "INSERT INTO users (user_id, user_ps) VALUES (?, ?)"
-      cursor.execute(sql, (user_id, user_ps))
+      sql = f"INSERT INTO users (user_id, user_ps) VALUES ('{user_id}', '{user_ps}')"
+      cursor.execute(sql)
       conn.commit()
 
       return redirect(url_for('login'))
     except sqlite3.IntegrityError:
-      return "이미 존재하는 아이디입니다. <a href="/">메인페이지로 돌아가기</a>"
+      return '이미 존재하는 아이디입니다. <a href="/">메인페이지로 돌아가기</a>'
     finally:
       conn.close()
 
@@ -89,8 +89,8 @@ def create():
     conn = db_connection()
     try:
       cursor = conn.cursor()
-      sql = "INSERT INTO posts (title, body) VALUES (?, ?)"
-      cursor.execute(sql, (title, body))
+      sql = f"INSERT INTO posts (title, body) VALUES ('{title}', '{body}')"
+      cursor.execute(sql)
       conn.commit()
       return redirect(url_for('main'))
     
@@ -104,8 +104,8 @@ def read(id):
   conn = db_connection()
   try:
     cursor = conn.cursor()
-    sql = "SELECT * FROM posts WHERE id = ?"
-    cursor.execute(sql, (id, ))
+    sql = f"SELECT * FROM posts WHERE id = '{id}'"
+    cursor.execute(sql)
     post = cursor.fetchone()
     if not post:
       return "존재하지 않는 게시글입니다. <a href="/">메인페이지로 돌아가기</a>"
@@ -123,8 +123,8 @@ def update(id):
     conn = db_connection()
     try:
       cursor = conn.cursor()
-      sql = "UPDATE posts SET title = ?, body = ? WHERE id = ?"
-      cursor.execute(sql, (title, body, id))
+      sql = f"UPDATE posts SET title = '{title}', body = '{body}' WHERE id = '{id}'"
+      cursor.execute(sql)
       conn.commit()
       return redirect(url_for('main'))
     
@@ -134,8 +134,8 @@ def update(id):
     conn = db_connection()
     try:
       cursor = conn.cursor()
-      sql = "SELECT * FROM posts WHERE id = ?"
-      cursor.execute(sql, (id, ))
+      sql = f"SELECT * FROM posts WHERE id = '{id}'"
+      cursor.execute(sql)
       post = cursor.fetchone()
       if not post:
         return '존재하지 않는 게시글입니다. <a href="/">메인페이지로 돌아가기</a>'
@@ -149,8 +149,8 @@ def delete(id):
   conn = db_connection()
   try:
     cursor = conn.cursor()
-    sql = "DELETE FROM posts WHERE id = ?"
-    cursor.execute(sql, (id, ))
+    sql = f"DELETE FROM posts WHERE id = '{id}'"
+    cursor.execute(sql)
     conn.commit()
   finally:
     conn.close()
