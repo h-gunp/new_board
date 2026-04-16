@@ -30,7 +30,7 @@ def login():
     conn = db_connection()
     try:
       cursor = conn.cursor()
-      sql = f"SELECT * FROM users WHERE user_id = '{user_id}' AND user_ps = '{user_id}'"
+      sql = f"SELECT * FROM users WHERE user_id = '{user_id}' AND user_ps = '{user_ps}'"
       cursor.execute(sql)
       user = cursor.fetchone()
 
